@@ -40,7 +40,7 @@
     }
     nav a:hover { color: #999; }
 
-    /* Stage 1: Intro */
+    /* Intro Kino */
     .intro {
       position: fixed;
       width: 100%;
@@ -57,7 +57,7 @@
     }
     .intro p { margin: 0.4em 0; }
 
-    /* Stage 3: Landing Page */
+    /* Monument Landing Page */
     main.hero {
       min-height: 100vh;
       display: flex;
@@ -81,7 +81,7 @@
       letter-spacing: 0.12em;
     }
 
-    /* Sections */
+    /* Sections (Galerie = weißer Raum) */
     section {
       display: none;
       min-height: 100vh;
@@ -122,9 +122,6 @@
     .exhibit:hover .book {
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
-
-    .exhibit h2 { font-size: 1.2em; margin: 0.3em 0; }
-    .exhibit p { font-size: 0.9em; margin: 0; color: #555; }
 
     /* Lightbox / Kino */
     .lightbox {
@@ -206,7 +203,7 @@
     <h2>未来的古老语言</h2>
   </main>
 
-  <!-- Unterseiten -->
+  <!-- Unterseiten (weiße Galerie) -->
   <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
 
   <section id="works">
@@ -248,7 +245,7 @@
     function showPage(pageId) {
       document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
       document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
-      document.querySelector('nav').style.color = (pageId === 'home') ? '#fff' : '#000';
+      document.querySelectorAll('nav a').forEach(a => a.style.color = (pageId === 'home') ? '#fff' : '#000');
       document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
       if(pageId === 'home') {
         document.querySelector('main.hero').classList.add('active');
