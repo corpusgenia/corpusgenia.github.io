@@ -15,6 +15,7 @@
       text-align: center;
       overflow-x: hidden;
       font-family: 'Lato', sans-serif;
+      transition: background-color 1s, color 1s;
     }
 
     /* Skip Link (Barrierefreiheit) */
@@ -91,6 +92,7 @@
       font-size: 0.9em;
       letter-spacing: 0.1em;
       color: #aaa;
+      font-weight: 300;
     }
 
     /* Stage 3: Monument Landing Page */
@@ -103,6 +105,7 @@
       padding: 0 20px;
       opacity: 0;
       animation: fadeIn 3s 11s forwards;
+      transition: opacity 0.8s;
     }
     h1 {
       font-family: 'Playfair Display', serif;
@@ -119,19 +122,19 @@
       letter-spacing: 0.15em;
     }
 
-    /* Unterseiten */
+    /* Unterseiten als Museumsräume */
     section {
       display: none;
       min-height: 100vh;
-      background-color: white;
-      color: black;
       padding: 120px 20px 50px;
       font-family: 'Lato', sans-serif;
       font-weight: 300;
       font-size: 1.1em;
       letter-spacing: 0.05em;
+      opacity: 0;
+      transition: opacity 0.8s;
     }
-    section.active { display: block; }
+    section.active { display: block; opacity: 1; }
 
     footer {
       padding: 40px 20px;
@@ -171,16 +174,16 @@
   </div>
 
   <!-- Stage 3: Monument Landing Page -->
-  <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia">
+  <main class="hero active" id="main-content" aria-label="Verlagshaus Corpus Genia">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
     <h2 lang="de">DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
     <h2 lang="en">THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2 lang="zh">未来的古老语言</h2>
   </main>
 
-  <!-- Unterseiten -->
-  <section id="about"><h1>Über mich</h1><p>Hier entsteht dein Editorial-Text in Chanel x Tom Ford Optik.</p></section>
-  <section id="works"><h1>Werke</h1><p>Hier entsteht dein Katalog aller Veröffentlichungen.</p></section>
+  <!-- Unterseiten (Museumsräume) -->
+  <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
+  <section id="works"><h1>Werke</h1><p>Jedes Werk ein Raum, jede Seite ein Artefakt.</p></section>
   <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
 
   <footer>
@@ -189,7 +192,12 @@
 
   <script>
     function showPage(pageId) {
-      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
+      document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
+      document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
+      document.querySelector('nav').style.background = (pageId === 'home') ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)';
+      document.querySelectorAll('main.hero, section').forEach(el => {
+        el.classList.remove('active');
+      });
       if(pageId === 'home') {
         document.querySelector('main.hero').classList.add('active');
       } else {
@@ -197,8 +205,6 @@
       }
       window.scrollTo(0, 0);
     }
-    // Home sichtbar halten beim Start
-    document.querySelector('main.hero').classList.add('active');
   </script>
 
 </body>
