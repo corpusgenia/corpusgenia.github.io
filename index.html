@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verlagshaus Corpus Genia</title>
+  <title>Verlagshaus Corpus Genia - Cinema Intro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -14,252 +14,82 @@
       color: #fff;
       font-family: 'Playfair Display', serif;
       text-align: center;
-      overflow-x: hidden;
-      transition: background-color 1s, color 1s;
+      overflow: hidden;
     }
 
-    /* Navigation */
-    nav {
+    .stage {
       position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 20px 0;
-      z-index: 10;
-      opacity: 0;
-      animation: fadeIn 3s 12s forwards;
-    }
-    nav a {
-      color: inherit;
-      text-decoration: none;
-      font-size: 1em;
-      letter-spacing: 0.12em;
-      transition: color 0.3s;
-    }
-    nav a:hover { color: #999; }
-
-    /* Intro Kino */
-    .intro {
-      position: fixed;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      font-weight: 400;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+
+    .stage.active {
+      opacity: 1;
+    }
+
+    .stage h1 {
+      font-size: 3em;
+      letter-spacing: 0.15em;
+      margin: 0.3em 0;
+    }
+
+    .stage h2 {
       font-size: 1.5em;
       letter-spacing: 0.12em;
-      background-color: #000;
-      animation: fadeOut 3s 5s forwards;
-    }
-    .intro p { margin: 0.4em 0; }
-
-    /* Monument Landing Page */
-    main.hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0 20px;
-      opacity: 0;
-      animation: fadeIn 3s 11s forwards;
-    }
-    h1 {
-      font-weight: 700;
-      font-size: 3em;
-      margin: 0.5em 0;
-      letter-spacing: 0.2em;
-    }
-    h2 {
-      font-weight: 400;
-      font-size: 1.2em;
-      margin: 0.4em 0;
-      letter-spacing: 0.12em;
+      margin: 0.2em 0;
     }
 
-    /* Sections (Galerie = weißer Raum) */
-    section {
-      display: none;
-      min-height: 100vh;
-      padding: 120px 20px 50px;
-      font-weight: 400;
-      font-size: 1.1em;
-      letter-spacing: 0.05em;
-      opacity: 0;
-      transition: opacity 0.8s;
+    .source {
+      margin-top: 1em;
+      font-size: 1em;
+      letter-spacing: 0.15em;
     }
-    section.active { display: block; opacity: 1; }
-
-    /* Werke-Galerie */
-    .gallery {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 60px;
-      margin-top: 60px;
-    }
-    .exhibit {
-      text-align: center;
-      width: 220px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .exhibit:hover { transform: translateY(-10px); }
-
-    .book {
-      width: 180px;
-      height: 260px;
-      background: linear-gradient(145deg, #d4af37, #f7e98e);
-      border-radius: 6px;
-      margin: 0 auto 20px auto;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: box-shadow 0.3s;
-    }
-    .exhibit:hover .book {
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }
-
-    /* Lightbox / Kino */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s;
-      z-index: 200;
-    }
-    .lightbox.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 30px;
-      right: 40px;
-      font-size: 2em;
-      color: #fff;
-      cursor: pointer;
-    }
-    .book-3d {
-      width: 180px;
-      height: 260px;
-      background: linear-gradient(145deg, #d4af37, #f7e98e);
-      border-radius: 6px;
-      box-shadow: 0 0 40px rgba(255,215,0,0.5);
-      animation: spin 6s linear infinite;
-      transform-style: preserve-3d;
-    }
-    @keyframes spin {
-      from { transform: rotateY(0deg); }
-      to { transform: rotateY(360deg); }
-    }
-
-    footer {
-      padding: 40px 20px;
-      font-size: 0.8em;
-      color: #777;
-      letter-spacing: 0.08em;
-    }
-
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-    @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
-    <a href="#" onclick="showPage('works')">WERKE</a>
-    <a href="#" onclick="showPage('contact')">KONTAKT</a>
-  </nav>
-
-  <!-- Intro Kino -->
-  <div class="intro">
-    <p>FILLING THE GAP</p>
-    <p>Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
-    <p>Once you can see, you can never unsee.</p>
-    <p>我们一旦能看见，就永远无法不看见</p>
-    <p class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</p>
+  <!-- Stage 1 -->
+  <div class="stage" id="stage1">
+    <h1>FILLING THE GAP</h1>
   </div>
 
-  <!-- Monument Landing Page -->
-  <main class="hero active" id="main-content">
+  <!-- Stage 2 -->
+  <div class="stage" id="stage2">
+    <h1>WEIL WENN DU EINMAL SEHEN KANNST</h1>
+    <h1>KANNST DU NIE WIEDER NICHT SEHEN</h1>
+    <h2>ONCE YOU CAN SEE, YOU CAN NEVER UNSEE</h2>
+    <h2>我们一旦能看见，就永远无法不看见</h2>
+    <div class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</div>
+  </div>
+
+  <!-- Stage 3 -->
+  <div class="stage" id="stage3">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
     <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
     <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2>未来的古老语言</h2>
-  </main>
-
-  <!-- Unterseiten (weiße Galerie) -->
-  <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
-
-  <section id="works">
-    <h1>Werke</h1>
-    <p>Jedes Werk ist ein Exponat unseres digitalen Museums.</p>
-    <div class="gallery">
-      <div class="exhibit" onclick="openLightbox()">
-        <div class="book"></div>
-        <h2>GENIA SYSTEMATICA I</h2>
-        <p>Interpsychische Strukturdiagnostik</p>
-      </div>
-      <div class="exhibit" onclick="openLightbox()">
-        <div class="book"></div>
-        <h2>GENIA SYSTEMATICA II</h2>
-        <p>Ordnungsräume & Bewegungsachsen</p>
-      </div>
-      <div class="exhibit" onclick="openLightbox()">
-        <div class="book"></div>
-        <h2>SUIRIS</h2>
-        <p>Das Schattenwerk der Bewusstseinsarchitektur</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
-
-  <footer>
-    © 2025 VERLAGSHAUS CORPUS GENIA · ALL RIGHTS RESERVED · ALLE RECHTE VORBEHALTEN <br>
-    WELCOME@GENIA-SYSTEMATICA.DE
-  </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
-    <div class="book-3d"></div>
   </div>
 
   <script>
-    function showPage(pageId) {
-      document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
-      document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
-      document.querySelectorAll('nav a').forEach(a => a.style.color = (pageId === 'home') ? '#fff' : '#000');
-      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
-      if(pageId === 'home') {
-        document.querySelector('main.hero').classList.add('active');
-      } else {
-        document.getElementById(pageId).classList.add('active');
-      }
-      window.scrollTo(0, 0);
+    const stages = [document.getElementById('stage1'), document.getElementById('stage2'), document.getElementById('stage3')];
+
+    let current = 0;
+    function showStage(index) {
+      stages.forEach((stage, i) => stage.classList.toggle('active', i === index));
     }
-    function openLightbox() {
-      document.getElementById('lightbox').classList.add('active');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-    }
+
+    showStage(current);
+    setInterval(() => {
+      current++;
+      if (current >= stages.length) return;
+      showStage(current);
+    }, 5000);
   </script>
 
 </body>
