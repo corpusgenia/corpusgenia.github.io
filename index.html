@@ -6,20 +6,19 @@
   <title>Verlagshaus Corpus Genia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Playfair Display + Lato für Couture-Vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    body { 
+    body {
       margin: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Lato', sans-serif;
+      font-family: 'Playfair Display', serif;
       text-align: center;
-      letter-spacing: 0.1em;
       overflow-x: hidden;
     }
 
-    /* Intro */
+    /* Intro Text */
     .intro {
       position: fixed;
       width: 100%;
@@ -27,11 +26,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      font-size: 2.5em;
+      letter-spacing: 0.1em;
       background-color: #000;
-      font-size: 1.5em;
-      font-family: 'Lato', sans-serif;
-      animation: fadeOut 6s forwards;
+      animation: fadeOut 5s forwards;
     }
 
     @keyframes fadeOut {
@@ -42,44 +40,40 @@
 
     /* Monument */
     .hero {
-      padding-top: 20vh;
-    }
-
-    .dukat {
-      width: 150px;
-      margin: 40px auto;
-      display: block;
-      animation: pulse 6s infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: 0.2em;
+      font-size: 2.2em;
+      margin: 0.2em 0;
+      letter-spacing: 0.1em;
+      font-weight: 400;
     }
 
     h2 {
-      font-weight: 300;
-      font-size: 1.2em;
-      margin: 15px 0;
-      font-family: 'Lato', sans-serif;
+      font-size: 1.5em;
+      margin: 0.2em 0;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+
+    h3 {
+      font-size: 3em;
+      margin-top: 0.5em;
       letter-spacing: 0.15em;
+      font-weight: 700;
     }
 
     footer {
-      padding: 50px 20px;
+      padding: 40px 20px;
       font-size: 0.8em;
-      color: #aaa;
-      margin-top: 100px;
+      color: #777;
       letter-spacing: 0.1em;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.5; }
     }
   </style>
 </head>
@@ -87,21 +81,19 @@
 
   <!-- Intro -->
   <div class="intro">
-   
-    FILLING THE GAP.
+    FILLING THE GAP
   </div>
 
   <!-- Monument Landing Page -->
   <div class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Gold_medal_icon.svg" alt="Dukat-Siegel" class="dukat">
-    <h1>VERLAGSHAUS CORPUS GENIA</h1>
+    <h1>DIE ANTIKE SPRACHE DER ZUKUNFT</h1>
     <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
-    <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h3>VERLAGSHAUS CORPUS GENIA</h3>
   </div>
 
   <!-- Footer -->
   <footer>
-    © VERLAGSHAUS CORPUS GENIA | WELCOME@GENIA-SYSTEMATICA.DE
+    © VERLAGSHAUS CORPUS GENIA · WELCOME@GENIA-SYSTEMATICA.DE
   </footer>
 
 </body>
