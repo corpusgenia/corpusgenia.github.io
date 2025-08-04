@@ -34,10 +34,10 @@
     }
 
     nav a:hover {
-      color: gold;
+      color: #999;
     }
 
-    /* Hero Section */
+    /* Hero (Landingpage) */
     .hero {
       display: flex;
       flex-direction: column;
@@ -46,29 +46,17 @@
       height: 100vh;
     }
 
-    .hero img {
-      width: 200px;
-      margin-bottom: 40px;
-      animation: glow 4s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 5px gold); }
-      to { filter: drop-shadow(0 0 30px gold); }
-    }
-
     .hero h1 {
-      font-size: 2.8em;
-      letter-spacing: 3px;
-      margin: 0.2em 0;
+      font-size: 3em;
+      letter-spacing: 4px;
+      margin: 0.3em 0;
     }
 
     .hero h2 {
-      font-size: 1.4em;
-      color: white;
-      margin: 0.2em 0;
-      font-weight: normal;
+      font-size: 1.3em;
+      font-weight: 300;
       letter-spacing: 2px;
+      margin: 0.2em 0;
     }
 
     footer {
@@ -77,14 +65,15 @@
       color: #777;
     }
 
-    /* Unterseiten-Template */
+    /* Unterseiten */
     section {
       display: none;
-      padding: 100px 20px 50px;
+      padding: 120px 20px 50px;
       min-height: 100vh;
       background-color: white;
       color: black;
       font-family: "Didot", "Times New Roman", serif;
+      text-align: center;
     }
 
     section.active {
@@ -96,27 +85,27 @@
   <!-- Navigation -->
   <nav>
     <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('about')">ÜBER UNS</a>
+    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
     <a href="#" onclick="showPage('works')">WERKE</a>
     <a href="#" onclick="showPage('contact')">KONTAKT</a>
   </nav>
 
   <!-- Hero (Landingpage) -->
   <div id="home" class="hero active">
-    <img src="dukat.jpeg" alt="Dukat-Siegel">
-    <h1>The Ancient Language of the Future</h1>
+    <h1>VERLAGSHAUS CORPUS GENIA</h1>
+    <h2>The Ancient Language of the Future</h2>
     <h2>Die antike Sprache der Zukunft</h2>
   </div>
 
   <!-- Unterseiten -->
   <section id="about">
-    <h1>Über uns</h1>
-    <p>Hier entsteht die Geschichte des Verlagshauses Corpus Genia.</p>
+    <h1>Über mich</h1>
+    <p>Hier entsteht die Geschichte von Corpus Genia.</p>
   </section>
 
   <section id="works">
     <h1>Unsere Werke</h1>
-    <p>Hier wird dein Katalog, Self‑Publishing und alle Buchprojekte erscheinen.</p>
+    <p>Hier entsteht dein Katalog aller Veröffentlichungen.</p>
   </section>
 
   <section id="contact">
