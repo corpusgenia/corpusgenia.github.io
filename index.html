@@ -18,19 +18,6 @@
       transition: background-color 1s, color 1s;
     }
 
-    /* Skip Link (Barrierefreiheit) */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #fff;
-      color: #000;
-      padding: 8px 16px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus { top: 10px; }
-
     /* Navigation */
     nav {
       position: fixed;
@@ -52,7 +39,7 @@
       letter-spacing: 0.12em;
       transition: color 0.3s;
     }
-    nav a:hover, nav a:focus { color: #999; }
+    nav a:hover { color: #999; }
 
     /* Stage 1: Intro */
     .intro {
@@ -122,7 +109,7 @@
       letter-spacing: 0.15em;
     }
 
-    /* Unterseiten als Museumsräume */
+    /* Museumsräume */
     section {
       display: none;
       min-height: 100vh;
@@ -136,6 +123,94 @@
     }
     section.active { display: block; opacity: 1; }
 
+    /* Werke-Galerie */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    .exhibit {
+      text-align: center;
+      width: 220px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .exhibit:hover { transform: translateY(-10px); }
+
+    .book {
+      width: 180px;
+      height: 260px;
+      background: linear-gradient(145deg, #d4af37, #f7e98e);
+      border-radius: 6px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: box-shadow 0.3s;
+    }
+    .exhibit:hover .book {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .exhibit h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2em;
+      margin: 0.3em 0;
+    }
+    .exhibit p {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 0.9em;
+      margin: 0;
+      color: #555;
+    }
+
+    /* Lightbox / Kinosaal */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s;
+      z-index: 200;
+    }
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* 3D-Buch-Animation */
+    .book-3d {
+      width: 180px;
+      height: 260px;
+      background: linear-gradient(145deg, #d4af37, #f7e98e);
+      border-radius: 6px;
+      box-shadow: 0 0 40px rgba(255,215,0,0.5);
+      animation: spin 6s linear infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
     footer {
       padding: 40px 20px;
       font-size: 0.8em;
@@ -143,67 +218,71 @@
       letter-spacing: 0.08em;
     }
 
-    /* Animations */
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
   </style>
 </head>
 <body>
 
-  <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
-    <a href="#" onclick="showPage('works')">WERKE</a>
-    <a href="#" onclick="showPage('contact')">KONTAKT</a>
-  </nav>
-
   <!-- Stage 1: Intro -->
-  <div class="intro" aria-label="Intro">
-    FILLING THE GAP
-  </div>
+  <div class="intro">FILLING THE GAP</div>
 
-  <!-- Stage 2: Claim mit Quelle -->
-  <div class="claim" aria-label="Philosophischer Claim">
+  <!-- Stage 2: Claim -->
+  <div class="claim">
     <p lang="de">Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
     <p lang="en">Once you can see, you can never unsee.</p>
     <p lang="zh">我们一旦能看见，就永远无法不看见</p>
-    <div class="source">— Schöpferin Miss Sakina Wisdom</div>
+    <div class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</div>
   </div>
 
   <!-- Stage 3: Monument Landing Page -->
-  <main class="hero active" id="main-content" aria-label="Verlagshaus Corpus Genia">
+  <main class="hero active" id="main-content">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
     <h2 lang="de">DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
     <h2 lang="en">THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2 lang="zh">未来的古老语言</h2>
   </main>
 
-  <!-- Unterseiten (Museumsräume) -->
-  <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
-  <section id="works"><h1>Werke</h1><p>Jedes Werk ein Raum, jede Seite ein Artefakt.</p></section>
-  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
+  <!-- Unterseiten -->
+  <section id="works">
+    <h1>Werke</h1>
+    <p>Jedes Werk ist ein Exponat unseres digitalen Museums.</p>
+    <div class="gallery">
+      <div class="exhibit" onclick="openLightbox('GENIA SYSTEMATICA I')">
+        <div class="book"></div>
+        <h2>GENIA SYSTEMATICA I</h2>
+        <p>Interpsychische Strukturdiagnostik</p>
+      </div>
+      <div class="exhibit" onclick="openLightbox('GENIA SYSTEMATICA II')">
+        <div class="book"></div>
+        <h2>GENIA SYSTEMATICA II</h2>
+        <p>Ordnungsräume & Bewegungsachsen</p>
+      </div>
+      <div class="exhibit" onclick="openLightbox('SUIRIS')">
+        <div class="book"></div>
+        <h2>SUIRIS</h2>
+        <p>Das Schattenwerk der Bewusstseinsarchitektur</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    © VERLAGSHAUS CORPUS GENIA · WELCOME@GENIA-SYSTEMATICA.DE
+    © 2025 VERLAGSHAUS CORPUS GENIA · ALL RIGHTS RESERVED · ALLE RECHTE VORBEHALTEN <br>
+    WELCOME@GENIA-SYSTEMATICA.DE
   </footer>
 
+  <!-- Lightbox Kinosaal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+    <div class="book-3d"></div>
+  </div>
+
   <script>
-    function showPage(pageId) {
-      document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
-      document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
-      document.querySelector('nav').style.background = (pageId === 'home') ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)';
-      document.querySelectorAll('main.hero, section').forEach(el => {
-        el.classList.remove('active');
-      });
-      if(pageId === 'home') {
-        document.querySelector('main.hero').classList.add('active');
-      } else {
-        document.getElementById(pageId).classList.add('active');
-      }
-      window.scrollTo(0, 0);
+    function openLightbox(title) {
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
     }
   </script>
 
