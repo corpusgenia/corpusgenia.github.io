@@ -5,92 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verlagshaus Corpus Genia</title>
   <style>
-    body { 
+    body {
       margin: 0;
-      background-color: #000;
-      color: #FFD700;
-      font-family: 'Garamond', serif;
+      background-color: black;
+      color: white;
+      font-family: "Didot", "Times New Roman", serif;
       text-align: center;
-      overflow-x: hidden;
     }
 
-    /* Intro */
-    .intro {
+    /* Navigation */
+    nav {
       position: fixed;
+      top: 0;
       width: 100%;
-      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
-      align-items: center;
       justify-content: center;
-      flex-direction: column;
-      background-color: #000;
-      font-size: 2em;
-      animation: fadeOut 6s forwards;
+      padding: 20px 0;
     }
 
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 25px;
+      font-size: 1em;
+      letter-spacing: 2px;
+      transition: color 0.3s;
     }
 
-    /* Monument */
+    nav a:hover {
+      color: gold;
+    }
+
+    /* Hero Section */
     .hero {
-      padding-top: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .dukat {
-      width: 120px;
-      margin: 40px auto;
-      display: block;
-      animation: pulse 6s infinite;
+    .hero img {
+      width: 200px;
+      margin-bottom: 40px;
+      animation: glow 4s infinite alternate;
     }
 
-    h1 {
-      font-size: 3em;
-      margin: 0;
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px gold); }
+      to { filter: drop-shadow(0 0 30px gold); }
     }
 
-    h2 {
+    .hero h1 {
+      font-size: 2.8em;
+      letter-spacing: 3px;
+      margin: 0.2em 0;
+    }
+
+    .hero h2 {
+      font-size: 1.4em;
+      color: white;
+      margin: 0.2em 0;
       font-weight: normal;
-      font-size: 1.5em;
-      margin: 10px 0;
+      letter-spacing: 2px;
     }
 
     footer {
-      padding: 50px 20px;
-      font-size: 0.9em;
-      color: #FFD700;
-      margin-top: 100px;
+      padding: 40px;
+      font-size: 0.8em;
+      color: #777;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
+    /* Unterseiten-Template */
+    section {
+      display: none;
+      padding: 100px 20px 50px;
+      min-height: 100vh;
+      background-color: white;
+      color: black;
+      font-family: "Didot", "Times New Roman", serif;
+    }
+
+    section.active {
+      display: block;
     }
   </style>
 </head>
 <body>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('about')">ÜBER UNS</a>
+    <a href="#" onclick="showPage('works')">WERKE</a>
+    <a href="#" onclick="showPage('contact')">KONTAKT</a>
+  </nav>
 
-  <!-- Intro -->
-  <div class="intro">
-    Relax your body, genius.<br>
-    We are filling the gap.
+  <!-- Hero (Landingpage) -->
+  <div id="home" class="hero active">
+    <img src="dukat.jpeg" alt="Dukat-Siegel">
+    <h1>The Ancient Language of the Future</h1>
+    <h2>Die antike Sprache der Zukunft</h2>
   </div>
 
-  <!-- Monument Landing Page -->
-  <div class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Gold_medal_icon.svg" alt="Dukat-Siegel" class="dukat">
-    <h1>Verlagshaus Corpus Genia</h1>
-    <h2>The Ancient Language of the Future</h2>
-    <h2>Die Antike Sprache der Zukunft</h2>
-  </div>
+  <!-- Unterseiten -->
+  <section id="about">
+    <h1>Über uns</h1>
+    <p>Hier entsteht die Geschichte des Verlagshauses Corpus Genia.</p>
+  </section>
+
+  <section id="works">
+    <h1>Unsere Werke</h1>
+    <p>Hier wird dein Katalog, Self‑Publishing und alle Buchprojekte erscheinen.</p>
+  </section>
+
+  <section id="contact">
+    <h1>Kontakt</h1>
+    <p>E-Mail: welcome@genia-systematica.de</p>
+  </section>
 
   <!-- Footer -->
   <footer>
-    © Verlagshaus Corpus Genia | welcome@genia-systematica.de
+    © Verlagshaus Corpus Genia · welcome@genia-systematica.de
   </footer>
 
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.hero, section').forEach(el => el.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
 </body>
 </html>
