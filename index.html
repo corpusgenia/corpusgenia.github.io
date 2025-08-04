@@ -6,17 +6,52 @@
   <title>Verlagshaus Corpus Genia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Playfair Display für Monument, Lato für Sprache -->
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Lato', sans-serif;
       text-align: center;
       overflow-x: hidden;
+      font-family: 'Lato', sans-serif;
     }
+
+    /* Skip Link (Barrierefreiheit) */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #fff;
+      color: #000;
+      padding: 8px 16px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    .skip-link:focus { top: 10px; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 3s 13s forwards;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+      letter-spacing: 0.12em;
+      transition: color 0.3s;
+    }
+    nav a:hover, nav a:focus { color: #999; }
 
     /* Stage 1: Intro */
     .intro {
@@ -26,9 +61,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2em;
       font-family: 'Lato', sans-serif;
       font-weight: 300;
+      font-size: 2em;
       letter-spacing: 0.15em;
       background-color: #000;
       animation: fadeOut 3s 3s forwards;
@@ -45,18 +80,21 @@
       flex-direction: column;
       font-family: 'Lato', sans-serif;
       font-weight: 300;
+      font-size: 1.2em;
       letter-spacing: 0.12em;
-      font-size: 1.3em;
       opacity: 0;
-      animation: fadeIn 3s 3s forwards, fadeOut 3s 7s forwards;
+      animation: fadeIn 3s 3s forwards, fadeOut 3s 8s forwards;
+    }
+    .claim p { margin: 0.7em 0; }
+    .source {
+      margin-top: 1.5em;
+      font-size: 0.9em;
+      letter-spacing: 0.1em;
+      color: #aaa;
     }
 
-    .claim p {
-      margin: 0.5em 0;
-    }
-
-    /* Stage 3: Monument Landingpage */
-    .hero {
+    /* Stage 3: Monument Landing Page */
+    main.hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -64,24 +102,36 @@
       justify-content: center;
       padding: 0 20px;
       opacity: 0;
-      animation: fadeIn 3s 10s forwards;
+      animation: fadeIn 3s 11s forwards;
     }
-
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3em;
-      margin: 0.4em 0;
+      margin: 0.5em 0;
       font-weight: 700;
       letter-spacing: 0.2em;
     }
-
     h2 {
+      font-family: 'Lato', sans-serif;
       font-weight: 300;
       font-size: 1.2em;
-      margin: 0.3em 0;
-      font-family: 'Lato', sans-serif;
+      margin: 0.4em 0;
       letter-spacing: 0.15em;
     }
+
+    /* Unterseiten */
+    section {
+      display: none;
+      min-height: 100vh;
+      background-color: white;
+      color: black;
+      padding: 120px 20px 50px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 1.1em;
+      letter-spacing: 0.05em;
+    }
+    section.active { display: block; }
 
     footer {
       padding: 40px 20px;
@@ -91,40 +141,65 @@
     }
 
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
   </style>
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
+    <a href="#" onclick="showPage('works')">WERKE</a>
+    <a href="#" onclick="showPage('contact')">KONTAKT</a>
+  </nav>
+
   <!-- Stage 1: Intro -->
-  <div class="intro">
+  <div class="intro" aria-label="Intro">
     FILLING THE GAP
   </div>
 
-  <!-- Stage 2: Claim dreisprachig -->
-  <div class="claim">
-    <p>Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
-    <p>Once you can see, you can never unsee.</p>
-    <p>我们一旦能看见，就永远无法不看见</p>
+  <!-- Stage 2: Claim mit Quelle -->
+  <div class="claim" aria-label="Philosophischer Claim">
+    <p lang="de">Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
+    <p lang="en">Once you can see, you can never unsee.</p>
+    <p lang="zh">我们一旦能看见，就永远无法不看见</p>
+    <div class="source">— Schöpferin Miss Sakina Wisdom</div>
   </div>
 
   <!-- Stage 3: Monument Landing Page -->
-  <div class="hero">
+  <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
-    <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
-  </div>
+    <h2 lang="de">DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2 lang="en">THE ANCIENT LANGUAGE OF THE FUTURE</h2>
+    <h2 lang="zh">未来的古老语言</h2>
+  </main>
 
-  <!-- Footer -->
+  <!-- Unterseiten -->
+  <section id="about"><h1>Über mich</h1><p>Hier entsteht dein Editorial-Text in Chanel x Tom Ford Optik.</p></section>
+  <section id="works"><h1>Werke</h1><p>Hier entsteht dein Katalog aller Veröffentlichungen.</p></section>
+  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
+
   <footer>
     © VERLAGSHAUS CORPUS GENIA · WELCOME@GENIA-SYSTEMATICA.DE
   </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
+      if(pageId === 'home') {
+        document.querySelector('main.hero').classList.add('active');
+      } else {
+        document.getElementById(pageId).classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+    // Home sichtbar halten beim Start
+    document.querySelector('main.hero').classList.add('active');
+  </script>
 
 </body>
 </html>
