@@ -6,103 +6,285 @@
   <title>Verlagshaus Corpus Genia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Playfair Display + Lato für Couture-Vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { 
+    body {
       margin: 0;
       background-color: #000;
       color: #fff;
-      font-family: 'Lato', sans-serif;
+      font-family: 'Playfair Display', serif;
       text-align: center;
-      letter-spacing: 0.1em;
       overflow-x: hidden;
+      transition: background-color 1s, color 1s;
     }
 
-    /* Intro */
-    .intro {
+    /* Stage Styling */
+    .stage {
       position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 3s;
+      letter-spacing: 0.15em;
+      background-color: #000;
+      z-index: 1000;
+    }
+    .stage.active { opacity: 1; }
+
+    .stage h1 {
+      font-size: 3.5em;
+      font-weight: 400;
+      margin: 0.4em 0;
+      letter-spacing: 0.25em;
+    }
+    .stage h2 {
+      font-size: 1.6em;
+      font-weight: 400;
+      margin: 0.3em 0;
+      letter-spacing: 0.2em;
+    }
+    .source {
+      margin-top: 1em;
+      font-size: 1em;
+      letter-spacing: 0.3em;
+      opacity: 0.8;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
       width: 100%;
-      height: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
+      opacity: 0;
+      z-index: 10;
+      transition: opacity 1.5s;
+    }
+    nav.visible { opacity: 1; }
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1em;
+      letter-spacing: 0.15em;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #777; }
+
+    /* Main Hero */
+    main.hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+    main.hero.visible { opacity: 1; }
+
+    /* Subpages */
+    section {
+      display: none;
+      min-height: 100vh;
+      padding: 120px 20px 50px;
+      font-weight: 400;
+      font-size: 1.1em;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    section.active { display: block; opacity: 1; }
+
+    /* Works Gallery */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    .exhibit {
+      text-align: center;
+      width: 220px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .exhibit:hover { transform: translateY(-10px); }
+    .book {
+      width: 180px;
+      height: 260px;
+      background: linear-gradient(145deg, #d4af37, #f7e98e);
+      border-radius: 6px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      background-color: #000;
-      font-size: 1.5em;
-      font-family: 'Playfair Display', serif;
-      animation: fadeOut 6s forwards;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s;
+      z-index: 2000;
     }
-
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
+    .lightbox.active { opacity: 1; visibility: visible; }
+    .lightbox-close {
+      position: absolute;
+      top: 30px; right: 40px;
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
     }
-
-    /* Monument */
-    .hero {
-      padding-top: 20vh;
+    .book-3d {
+      width: 180px;
+      height: 260px;
+      background: linear-gradient(145deg, #d4af37, #f7e98e);
+      border-radius: 6px;
+      box-shadow: 0 0 40px rgba(255,215,0,0.5);
+      animation: spin 6s linear infinite;
+      transform-style: preserve-3d;
     }
+    @keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
 
-    .dukat {
-      width: 150px;
-      margin: 40px auto;
-      display: block;
-      animation: pulse 6s infinite;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-    }
-
-    h2 {
-      font-weight: 300;
-      font-size: 1.2em;
-      margin: 15px 0;
-      font-family: 'Lato', sans-serif;
-      letter-spacing: 0.15em;
-    }
-
+    /* Footer */
     footer {
-      padding: 50px 20px;
+      padding: 40px 20px;
       font-size: 0.8em;
-      color: #aaa;
-      margin-top: 100px;
-      letter-spacing: 0.1em;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.5; }
+      color: #777;
+      letter-spacing: 0.08em;
     }
   </style>
 </head>
 <body>
 
-  <!-- Intro -->
-  <div class="intro">
-    RELAX YOUR BODY, GENIUS.<br>
-    WE ARE FILLING THE GAP.
+  <!-- Stage 1 -->
+  <div class="stage" id="stage1">
+    <h1>FILLING THE GAP</h1>
   </div>
 
-  <!-- Monument Landing Page -->
-  <div class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Gold_medal_icon.svg" alt="Dukat-Siegel" class="dukat">
+  <!-- Stage 2 -->
+  <div class="stage" id="stage2">
+    <h1>WEIL WENN DU EINMAL SEHEN KANNST</h1>
+    <h1>KANNST DU NIE WIEDER NICHT SEHEN</h1>
+    <h2>ONCE YOU CAN SEE, YOU CAN NEVER UNSEE</h2>
+    <h2>我们一旦能看见，就永远无法不看见</h2>
+    <div class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</div>
+  </div>
+
+  <!-- Stage 3 -->
+  <div class="stage" id="stage3">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
+    <h2>未来的古老语言</h2>
   </div>
 
-  <!-- Footer -->
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
+    <a href="#" onclick="showPage('works')">WERKE</a>
+    <a href="#" onclick="showPage('contact')">KONTAKT</a>
+  </nav>
+
+  <!-- Hero -->
+  <main class="hero" id="home">
+    <h1>VERLAGSHAUS CORPUS GENIA</h1>
+    <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
+    <h2>未来的古老语言</h2>
+  </main>
+
+  <!-- Subpages -->
+  <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
+
+  <section id="works">
+    <h1>Werke</h1>
+    <p>Jedes Werk ist ein Exponat unseres digitalen Museums.</p>
+    <div class="gallery">
+      <div class="exhibit" onclick="openLightbox()">
+        <div class="book"></div>
+        <h2>GENIA SYSTEMATICA I</h2>
+      </div>
+      <div class="exhibit" onclick="openLightbox()">
+        <div class="book"></div>
+        <h2>GENIA SYSTEMATICA II</h2>
+      </div>
+      <div class="exhibit" onclick="openLightbox()">
+        <div class="book"></div>
+        <h2>SUIRIS</h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
+
   <footer>
-    © VERLAGSHAUS CORPUS GENIA | WELCOME@GENIA-SYSTEMATICA.DE
+    © 2025 VERLAGSHAUS CORPUS GENIA · ALL RIGHTS RESERVED · ALLE RECHTE VORBEHALTEN <br>
+    WELCOME@GENIA-SYSTEMATICA.DE
   </footer>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+    <div class="book-3d"></div>
+  </div>
+
+  <script>
+    const stages = [
+      document.getElementById('stage1'),
+      document.getElementById('stage2'),
+      document.getElementById('stage3')
+    ];
+    const navbar = document.getElementById('navbar');
+    const hero = document.getElementById('home');
+
+    let current = 0;
+    function showStage(index) {
+      stages.forEach((stage, i) => stage.classList.toggle('active', i === index));
+    }
+    showStage(current);
+
+    setTimeout(() => showStage(1), 10000);
+    setTimeout(() => showStage(2), 20000);
+    setTimeout(() => {
+      stages.forEach(stage => stage.style.display = 'none');
+      navbar.classList.add('visible');
+      hero.classList.add('visible');
+    }, 30000);
+
+    function showPage(pageId) {
+      document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
+      document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
+      document.querySelectorAll('nav a').forEach(a => a.style.color = (pageId === 'home') ? '#fff' : '#000');
+      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
+      if(pageId === 'home') {
+        hero.classList.add('active');
+      } else {
+        document.getElementById(pageId).classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    function openLightbox() {
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
 </body>
 </html>
