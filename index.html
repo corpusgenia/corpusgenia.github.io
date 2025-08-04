@@ -6,15 +6,15 @@
   <title>Verlagshaus Corpus Genia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       background-color: #000;
       color: #fff;
+      font-family: 'Playfair Display', serif;
       text-align: center;
       overflow-x: hidden;
-      font-family: 'Lato', sans-serif;
       transition: background-color 1s, color 1s;
     }
 
@@ -23,17 +23,16 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.8);
       display: flex;
       justify-content: center;
       gap: 40px;
       padding: 20px 0;
       z-index: 10;
       opacity: 0;
-      animation: fadeIn 3s 13s forwards;
+      animation: fadeIn 3s 12s forwards;
     }
     nav a {
-      color: white;
+      color: inherit;
       text-decoration: none;
       font-size: 1em;
       letter-spacing: 0.12em;
@@ -49,40 +48,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 2em;
-      letter-spacing: 0.15em;
-      background-color: #000;
-      animation: fadeOut 3s 3s forwards;
-    }
-
-    /* Stage 2: Claim */
-    .claim {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 1.2em;
+      font-weight: 400;
+      font-size: 1.5em;
       letter-spacing: 0.12em;
-      opacity: 0;
-      animation: fadeIn 3s 3s forwards, fadeOut 3s 8s forwards;
+      background-color: #000;
+      animation: fadeOut 3s 5s forwards;
     }
-    .claim p { margin: 0.7em 0; }
-    .source {
-      margin-top: 1.5em;
-      font-size: 0.9em;
-      letter-spacing: 0.1em;
-      color: #aaa;
-      font-weight: 300;
-    }
+    .intro p { margin: 0.4em 0; }
 
-    /* Stage 3: Monument Landing Page */
+    /* Stage 3: Landing Page */
     main.hero {
       min-height: 100vh;
       display: flex;
@@ -92,30 +67,26 @@
       padding: 0 20px;
       opacity: 0;
       animation: fadeIn 3s 11s forwards;
-      transition: opacity 0.8s;
     }
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-weight: 700;
       font-size: 3em;
       margin: 0.5em 0;
-      font-weight: 700;
       letter-spacing: 0.2em;
     }
     h2 {
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.2em;
       margin: 0.4em 0;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
     }
 
-    /* Museumsräume */
+    /* Sections */
     section {
       display: none;
       min-height: 100vh;
       padding: 120px 20px 50px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 1.1em;
       letter-spacing: 0.05em;
       opacity: 0;
@@ -152,21 +123,10 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
 
-    .exhibit h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.2em;
-      margin: 0.3em 0;
-    }
-    .exhibit p {
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 0.9em;
-      margin: 0;
-      color: #555;
-    }
+    .exhibit h2 { font-size: 1.2em; margin: 0.3em 0; }
+    .exhibit p { font-size: 0.9em; margin: 0; color: #555; }
 
-    /* Lightbox / Kinosaal */
+    /* Lightbox / Kino */
     .lightbox {
       position: fixed;
       top: 0;
@@ -194,8 +154,6 @@
       color: #fff;
       cursor: pointer;
     }
-
-    /* 3D-Buch-Animation */
     .book-3d {
       width: 180px;
       height: 260px;
@@ -205,7 +163,6 @@
       animation: spin 6s linear infinite;
       transform-style: preserve-3d;
     }
-
     @keyframes spin {
       from { transform: rotateY(0deg); }
       to { transform: rotateY(360deg); }
@@ -224,41 +181,49 @@
 </head>
 <body>
 
-  <!-- Stage 1: Intro -->
-  <div class="intro">FILLING THE GAP</div>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
+    <a href="#" onclick="showPage('works')">WERKE</a>
+    <a href="#" onclick="showPage('contact')">KONTAKT</a>
+  </nav>
 
-  <!-- Stage 2: Claim -->
-  <div class="claim">
-    <p lang="de">Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
-    <p lang="en">Once you can see, you can never unsee.</p>
-    <p lang="zh">我们一旦能看见，就永远无法不看见</p>
-    <div class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</div>
+  <!-- Intro Kino -->
+  <div class="intro">
+    <p>FILLING THE GAP</p>
+    <p>Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
+    <p>Once you can see, you can never unsee.</p>
+    <p>我们一旦能看见，就永远无法不看见</p>
+    <p class="source">— SCHÖPFERIN MISS SAKINAH WISDOM</p>
   </div>
 
-  <!-- Stage 3: Monument Landing Page -->
+  <!-- Monument Landing Page -->
   <main class="hero active" id="main-content">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2 lang="de">DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
-    <h2 lang="en">THE ANCIENT LANGUAGE OF THE FUTURE</h2>
-    <h2 lang="zh">未来的古老语言</h2>
+    <h2>DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2>THE ANCIENT LANGUAGE OF THE FUTURE</h2>
+    <h2>未来的古老语言</h2>
   </main>
 
   <!-- Unterseiten -->
+  <section id="about"><h1>Über mich</h1><p>Willkommen in meinem Museum der Gedanken.</p></section>
+
   <section id="works">
     <h1>Werke</h1>
     <p>Jedes Werk ist ein Exponat unseres digitalen Museums.</p>
     <div class="gallery">
-      <div class="exhibit" onclick="openLightbox('GENIA SYSTEMATICA I')">
+      <div class="exhibit" onclick="openLightbox()">
         <div class="book"></div>
         <h2>GENIA SYSTEMATICA I</h2>
         <p>Interpsychische Strukturdiagnostik</p>
       </div>
-      <div class="exhibit" onclick="openLightbox('GENIA SYSTEMATICA II')">
+      <div class="exhibit" onclick="openLightbox()">
         <div class="book"></div>
         <h2>GENIA SYSTEMATICA II</h2>
         <p>Ordnungsräume & Bewegungsachsen</p>
       </div>
-      <div class="exhibit" onclick="openLightbox('SUIRIS')">
+      <div class="exhibit" onclick="openLightbox()">
         <div class="book"></div>
         <h2>SUIRIS</h2>
         <p>Das Schattenwerk der Bewusstseinsarchitektur</p>
@@ -266,19 +231,33 @@
     </div>
   </section>
 
+  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
+
   <footer>
     © 2025 VERLAGSHAUS CORPUS GENIA · ALL RIGHTS RESERVED · ALLE RECHTE VORBEHALTEN <br>
     WELCOME@GENIA-SYSTEMATICA.DE
   </footer>
 
-  <!-- Lightbox Kinosaal -->
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
     <div class="book-3d"></div>
   </div>
 
   <script>
-    function openLightbox(title) {
+    function showPage(pageId) {
+      document.body.style.backgroundColor = (pageId === 'home') ? '#000' : '#fff';
+      document.body.style.color = (pageId === 'home') ? '#fff' : '#000';
+      document.querySelector('nav').style.color = (pageId === 'home') ? '#fff' : '#000';
+      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
+      if(pageId === 'home') {
+        document.querySelector('main.hero').classList.add('active');
+      } else {
+        document.getElementById(pageId).classList.add('active');
+      }
+      window.scrollTo(0, 0);
+    }
+    function openLightbox() {
       document.getElementById('lightbox').classList.add('active');
     }
     function closeLightbox() {
