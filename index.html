@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* ---------- GLOBAL ---------- */
     body {
       margin: 0;
       background-color: #000;
@@ -16,8 +17,9 @@
       overflow-x: hidden;
       font-family: 'Lato', sans-serif;
     }
+    a { outline: none; }
 
-    /* Skip Link (Barrierefreiheit) */
+    /* Skip-Link */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -25,12 +27,12 @@
       background: #fff;
       color: #000;
       padding: 8px 16px;
-      z-index: 100;
+      z-index: 1000;
       transition: top 0.3s;
     }
     .skip-link:focus { top: 10px; }
 
-    /* Navigation */
+    /* ---------- NAV ---------- */
     nav {
       position: fixed;
       top: 0;
@@ -42,7 +44,8 @@
       padding: 20px 0;
       z-index: 10;
       opacity: 0;
-      animation: fadeIn 3s 13s forwards;
+      animation: fadeIn 3s 14s forwards;
+      flex-wrap: wrap;
     }
     nav a {
       color: white;
@@ -50,10 +53,11 @@
       font-size: 1em;
       letter-spacing: 0.12em;
       transition: color 0.3s;
+      padding: 8px;
     }
     nav a:hover, nav a:focus { color: #999; }
 
-    /* Stage 1: Intro */
+    /* ---------- STAGE 1: INTRO ---------- */
     .intro {
       position: fixed;
       width: 100%;
@@ -63,13 +67,20 @@
       justify-content: center;
       font-family: 'Lato', sans-serif;
       font-weight: 300;
-      font-size: 2em;
+      font-size: 2.5em;
       letter-spacing: 0.15em;
       background-color: #000;
-      animation: fadeOut 3s 3s forwards;
+      filter: blur(0px);
+      animation: fadeOut 3s 5s forwards, blurIn 1s 0s;
+      padding: 0 20px;
+      text-align: center;
+    }
+    @keyframes blurIn {
+      from { filter: blur(10px); }
+      to { filter: blur(0px); }
     }
 
-    /* Stage 2: Claim */
+    /* ---------- STAGE 2: CLAIM ---------- */
     .claim {
       position: fixed;
       width: 100%;
@@ -80,12 +91,16 @@
       flex-direction: column;
       font-family: 'Lato', sans-serif;
       font-weight: 300;
-      font-size: 1.2em;
+      font-size: 1.4em;
       letter-spacing: 0.12em;
       opacity: 0;
-      animation: fadeIn 3s 3s forwards, fadeOut 3s 8s forwards;
+      animation: fadeIn 3s 5s forwards, fadeOut 3s 13s forwards;
+      padding: 0 20px;
+      text-align: center;
     }
     .claim p { margin: 0.7em 0; }
+    .claim p:first-child { font-size: 1.6em; }
+    .claim p:nth-child(2) { font-size: 1.5em; }
     .source {
       margin-top: 1.5em;
       font-size: 0.9em;
@@ -93,8 +108,9 @@
       color: #aaa;
     }
 
-    /* Stage 3: Monument Landing Page */
+    /* ---------- STAGE 3: HERO + 3D PARALLAX ---------- */
     main.hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -102,14 +118,37 @@
       justify-content: center;
       padding: 0 20px;
       opacity: 0;
-      animation: fadeIn 3s 11s forwards;
+      animation: fadeIn 3s 15s forwards;
+      overflow: hidden;
     }
+
+    /* Background Galerie */
+    .gallery-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      animation: gallerySlide 30s infinite linear;
+    }
+    @keyframes gallerySlide {
+      0% { background-image: url('https://picsum.photos/1920/1080?grayscale&1'); }
+      25% { background-image: url('https://picsum.photos/1920/1080?grayscale&2'); }
+      50% { background-image: url('https://picsum.photos/1920/1080?grayscale&3'); }
+      75% { background-image: url('https://picsum.photos/1920/1080?grayscale&4'); }
+      100% { background-image: url('https://picsum.photos/1920/1080?grayscale&1'); }
+    }
+
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3em;
       margin: 0.5em 0;
       font-weight: 700;
       letter-spacing: 0.2em;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
     h2 {
       font-family: 'Lato', sans-serif;
@@ -117,52 +156,78 @@
       font-size: 1.2em;
       margin: 0.4em 0;
       letter-spacing: 0.15em;
+      text-shadow: 0 0 12px rgba(255,255,255,0.2);
     }
 
-    /* Unterseiten */
-    section {
-      display: none;
-      min-height: 100vh;
-      background-color: white;
-      color: black;
-      padding: 120px 20px 50px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 1.1em;
-      letter-spacing: 0.05em;
-    }
-    section.active { display: block; }
-
+    /* ---------- FOOTER ---------- */
     footer {
       padding: 40px 20px;
       font-size: 0.8em;
       color: #777;
       letter-spacing: 0.08em;
     }
+    footer a { color: #777; text-decoration: none; }
+    footer a:hover, footer a:focus { color: #fff; }
 
-    /* Animations */
+    /* ---------- IMPRESSUM LIGHTBOX ---------- */
+    #impressum-overlay {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.95);
+      color:#fff;
+      padding: 60px 20px;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    #impressum-overlay h2 {
+      font-family: 'Playfair Display', serif;
+      margin-top:0;
+      margin-bottom: 1em;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 2.5em;
+      cursor: pointer;
+      color:#aaa;
+    }
+    .close-btn:hover, .close-btn:focus { color:#fff; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1023px) {
+      .intro { font-size: 2em; }
+      .claim { font-size: 1.2em; }
+      .claim p:first-child { font-size: 1.4em; }
+      .claim p:nth-child(2) { font-size: 1.3em; }
+      h1 { font-size: 2.2em; }
+      h2 { font-size: 1em; }
+    }
+    @media (max-width: 767px) {
+      .intro { font-size: 1.6em; }
+      .claim { font-size: 1em; }
+      .claim p:first-child { font-size: 1.2em; }
+      .claim p:nth-child(2) { font-size: 1.1em; }
+      h1 { font-size: 1.8em; }
+      h2 { font-size: 0.9em; }
+    }
+
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
   </style>
 </head>
 <body>
 
+  <!-- Skip-Link -->
   <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
-    <a href="#" onclick="showPage('works')">WERKE</a>
-    <a href="#" onclick="showPage('contact')">KONTAKT</a>
-  </nav>
-
-  <!-- Stage 1: Intro -->
-  <div class="intro" aria-label="Intro">
+  <!-- Stage 1 -->
+  <div class="intro" aria-label="Intro: Cinematic Start">
     FILLING THE GAP
   </div>
 
-  <!-- Stage 2: Claim mit Quelle -->
+  <!-- Stage 2 -->
   <div class="claim" aria-label="Philosophischer Claim">
     <p lang="de">Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
     <p lang="en">Once you can see, you can never unsee.</p>
@@ -170,35 +235,50 @@
     <div class="source">— Schöpferin Miss Sakina Wisdom</div>
   </div>
 
-  <!-- Stage 3: Monument Landing Page -->
-  <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia">
+  <!-- Stage 3: Hero -->
+  <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia Hauptbereich">
+    <div class="gallery-bg" aria-hidden="true"></div>
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2 lang="de">DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
-    <h2 lang="en">THE ANCIENT LANGUAGE OF THE FUTURE</h2>
-    <h2 lang="zh">未来的古老语言</h2>
+    <h2 lang="de">SPRICH: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2 lang="en">SPEAKS: THE ANCIENT LANGUAGE OF THE FUTURE</h2>
+    <h2 lang="zh">说：未来的古老语言</h2>
+    <h2>ISBN 978-3-982-0000-2018</h2>
   </main>
 
-  <!-- Unterseiten -->
-  <section id="about"><h1>Über mich</h1><p>Hier entsteht dein Editorial-Text in Chanel x Tom Ford Optik.</p></section>
-  <section id="works"><h1>Werke</h1><p>Hier entsteht dein Katalog aller Veröffentlichungen.</p></section>
-  <section id="contact"><h1>Kontakt</h1><p>E-Mail: welcome@genia-systematica.de</p></section>
-
+  <!-- Footer -->
   <footer>
-    © VERLAGSHAUS CORPUS GENIA · WELCOME@GENIA-SYSTEMATICA.DE
+    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@genia-systematica.de <br>
+    Alle Rechte vorbehalten · All Rights Reserved · 
+    <a href="#" onclick="openImpressum()" aria-label="Impressum öffnen">Impressum</a>
   </footer>
 
+  <!-- Impressum Lightbox -->
+  <div id="impressum-overlay" role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+    <div class="close-btn" tabindex="0" onclick="closeImpressum()" aria-label="Impressum schließen">×</div>
+    <h2 id="impressum-title">Impressum</h2>
+    <p><strong>Verlagshaus Corpus Genia</strong><br>
+    Lüdersweg 18<br>
+    34134 Kassel<br>
+    Deutschland</p>
+    <p>E-Mail: welcome@genia-systematica.de</p>
+    <p>Verantwortlich für den Inhalt: Schöpferin Miss Sakina Wisdom</p>
+  </div>
+
   <script>
-    function showPage(pageId) {
-      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
-      if(pageId === 'home') {
-        document.querySelector('main.hero').classList.add('active');
-      } else {
-        document.getElementById(pageId).classList.add('active');
-      }
-      window.scrollTo(0, 0);
+    function openImpressum() {
+      const overlay = document.getElementById('impressum-overlay');
+      overlay.style.display='block';
+      overlay.focus();
     }
-    // Home sichtbar halten beim Start
-    document.querySelector('main.hero').classList.add('active');
+    function closeImpressum() {
+      document.getElementById('impressum-overlay').style.display='none';
+    }
+    // ESC-Taste zum Schließen
+    document.addEventListener('keydown', function(e) {
+      if(e.key === "Escape") {
+        closeImpressum();
+      }
+    });
   </script>
 
 </body>
