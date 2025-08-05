@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ---------- GLOBAL ---------- */
     body {
       margin: 0;
       background-color: #000;
@@ -32,7 +31,7 @@
     }
     .skip-link:focus { top: 10px; }
 
-    /* ---------- NAV ---------- */
+    /* Navigation */
     nav {
       position: fixed;
       top: 0;
@@ -57,7 +56,7 @@
     }
     nav a:hover, nav a:focus { color: #999; }
 
-    /* ---------- STAGE 1: INTRO ---------- */
+    /* Stage 1: Intro */
     .intro {
       position: fixed;
       width: 100%;
@@ -80,7 +79,7 @@
       to { filter: blur(0px); }
     }
 
-    /* ---------- STAGE 2: CLAIM ---------- */
+    /* Stage 2: Claim */
     .claim {
       position: fixed;
       width: 100%;
@@ -108,7 +107,7 @@
       color: #aaa;
     }
 
-    /* ---------- STAGE 3: HERO + 3D PARALLAX ---------- */
+    /* Stage 3: Hero */
     main.hero {
       position: relative;
       min-height: 100vh;
@@ -121,8 +120,6 @@
       animation: fadeIn 3s 15s forwards;
       overflow: hidden;
     }
-
-    /* Background Galerie */
     .gallery-bg {
       position: absolute;
       top: 0;
@@ -159,7 +156,6 @@
       text-shadow: 0 0 12px rgba(255,255,255,0.2);
     }
 
-    /* ---------- FOOTER ---------- */
     footer {
       padding: 40px 20px;
       font-size: 0.8em;
@@ -169,7 +165,7 @@
     footer a { color: #777; text-decoration: none; }
     footer a:hover, footer a:focus { color: #fff; }
 
-    /* ---------- IMPRESSUM LIGHTBOX ---------- */
+    /* Impressum Overlay */
     #impressum-overlay {
       display: none;
       position: fixed;
@@ -195,24 +191,6 @@
     }
     .close-btn:hover, .close-btn:focus { color:#fff; }
 
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 1023px) {
-      .intro { font-size: 2em; }
-      .claim { font-size: 1.2em; }
-      .claim p:first-child { font-size: 1.4em; }
-      .claim p:nth-child(2) { font-size: 1.3em; }
-      h1 { font-size: 2.2em; }
-      h2 { font-size: 1em; }
-    }
-    @media (max-width: 767px) {
-      .intro { font-size: 1.6em; }
-      .claim { font-size: 1em; }
-      .claim p:first-child { font-size: 1.2em; }
-      .claim p:nth-child(2) { font-size: 1.1em; }
-      h1 { font-size: 1.8em; }
-      h2 { font-size: 0.9em; }
-    }
-
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
   </style>
@@ -221,6 +199,14 @@
 
   <!-- Skip-Link -->
   <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#about">ÜBER MICH</a>
+    <a href="#works">WERKE</a>
+    <a href="#contact">KONTAKT</a>
+  </nav>
 
   <!-- Stage 1 -->
   <div class="intro" aria-label="Intro: Cinematic Start">
@@ -239,7 +225,7 @@
   <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia Hauptbereich">
     <div class="gallery-bg" aria-hidden="true"></div>
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2 lang="de">SPRICH: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2 lang="de">SPRICHt: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
     <h2 lang="en">SPEAKS: THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2 lang="zh">说：未来的古老语言</h2>
     <h2>ISBN 978-3-982-0000-2018</h2>
@@ -247,20 +233,20 @@
 
   <!-- Footer -->
   <footer>
-    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@genia-systematica.de <br>
+    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@geniasystematica.de <br>
     Alle Rechte vorbehalten · All Rights Reserved · 
     <a href="#" onclick="openImpressum()" aria-label="Impressum öffnen">Impressum</a>
   </footer>
 
-  <!-- Impressum Lightbox -->
+  <!-- Impressum Overlay -->
   <div id="impressum-overlay" role="dialog" aria-modal="true" aria-labelledby="impressum-title">
     <div class="close-btn" tabindex="0" onclick="closeImpressum()" aria-label="Impressum schließen">×</div>
     <h2 id="impressum-title">Impressum</h2>
     <p><strong>Verlagshaus Corpus Genia</strong><br>
-    Lüdersweg 18<br>
-    34134 Kassel<br>
+    Friedrichsstraße 12<br>
+    34117 Kassel<br>
     Deutschland</p>
-    <p>E-Mail: welcome@genia-systematica.de</p>
+    <p>E-Mail: welcome@geniasystematica.de</p>
     <p>Verantwortlich für den Inhalt: Schöpferin Miss Sakina Wisdom</p>
   </div>
 
@@ -273,11 +259,8 @@
     function closeImpressum() {
       document.getElementById('impressum-overlay').style.display='none';
     }
-    // ESC-Taste zum Schließen
     document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") {
-        closeImpressum();
-      }
+      if(e.key === "Escape") closeImpressum();
     });
   </script>
 
