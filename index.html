@@ -11,10 +11,18 @@
     body {
       margin: 0;
       font-family: 'Lato', sans-serif;
-      background-color: #000;
-      color: #fff;
       overflow-x: hidden;
-      text-align: center;
+    }
+
+    /* Video Background */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
     /* Navigation */
@@ -22,14 +30,12 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.5);
       display: flex;
       justify-content: center;
       gap: 40px;
       padding: 20px 0;
       z-index: 10;
-      opacity: 0;
-      animation: fadeIn 3s 12s forwards;
     }
     nav a {
       color: white;
@@ -37,48 +43,48 @@
       letter-spacing: 0.12em;
       transition: color 0.3s;
     }
-    nav a:hover, nav a:focus { color: #999; }
+    nav a:hover, nav a:focus { color: #ddd; }
 
-    /* Intro Stage */
+    /* Intro */
     .intro {
-      position: fixed;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.5em;
       letter-spacing: 0.15em;
-      background-color: #000;
-      animation: fadeOut 3s 5s forwards;
+      color: white;
+      background-color: rgba(0,0,0,0.6);
     }
 
-    /* Claim Stage */
+    /* Claim */
     .claim {
-      position: fixed;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       font-size: 1.4em;
       letter-spacing: 0.12em;
-      opacity: 0;
-      animation: fadeIn 3s 5s forwards, fadeOut 3s 13s forwards;
+      color: white;
+      background-color: rgba(0,0,0,0.6);
+      text-align: center;
     }
     .claim p { margin: 0.7em 0; }
     .source { margin-top: 1.5em; font-size: 0.9em; color: #aaa; }
 
-    /* Hero Section */
+    /* Hero Section (Start) */
     main.hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      animation: fadeIn 3s 15s forwards;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
     }
     h1 {
       font-family: 'Playfair Display', serif;
@@ -91,20 +97,20 @@
       letter-spacing: 0.15em;
     }
 
-    /* Unterseiten */
+    /* White Pages */
     section {
-      display: none;
       min-height: 100vh;
-      background-color: #fff;
-      color: #000;
+      background: white;
+      color: black;
       padding: 120px 20px 50px;
-      font-weight: 300;
-      font-size: 1.1em;
-      letter-spacing: 0.05em;
+      text-align: center;
     }
-    section.active { display: block; }
+    section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+    }
 
-    /* 3D Galerie für Werke */
+    /* Gallery */
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -117,61 +123,42 @@
       height: 200px;
       object-fit: cover;
       border-radius: 10px;
-      transform: rotateY(0deg);
       transition: transform 0.6s ease;
     }
     .gallery img:hover {
-      transform: rotateY(180deg);
+      transform: scale(1.05);
     }
 
     /* Footer */
     footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
       padding: 40px 20px;
-      font-size: 0.8em;
-      color: #777;
+      font-size: 0.85em;
       letter-spacing: 0.08em;
     }
-    footer a { color: #777; text-decoration: none; }
-    footer a:hover { color: #fff; }
-
-    /* Impressum Overlay */
-    #impressum-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95);
-      color: #fff;
-      padding: 60px 20px;
-      z-index: 100;
-      overflow-y: auto;
-      text-align: left;
-    }
-    #impressum-overlay h2 { font-family: 'Playfair Display', serif; margin-top: 0; }
-    .close-btn {
-      position: absolute;
-      top: 20px; right: 20px;
-      font-size: 2em;
-      cursor: pointer;
-      color: #aaa;
-    }
-    .close-btn:hover { color: #fff; }
-
-    /* Animations */
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-    @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
+    footer a { color: #fff; text-decoration: none; }
+    footer a:hover { color: #ccc; }
   </style>
 </head>
 <body>
 
+  <!-- Video Background -->
+  <video autoplay muted loop class="video-bg">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <!-- Navigation -->
   <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('about')">ÜBER MICH</a>
-    <a href="#" onclick="showPage('works')">WERKE</a>
-    <a href="#" onclick="showPage('contact')">KONTAKT</a>
-    <a href="#" onclick="openImpressum()">IMPRESSUM & DATENSCHUTZ</a>
+    <a href="#home">HOME</a>
+    <a href="#about">ÜBER MICH</a>
+    <a href="#works">WERKE</a>
+    <a href="#contact">KONTAKT</a>
+    <a href="#impressum">IMPRESSUM & DATENSCHUTZ</a>
   </nav>
 
+  <!-- Intro & Claim -->
   <div class="intro">FILLING THE GAP</div>
 
   <div class="claim">
@@ -181,6 +168,7 @@
     <div class="source">— Schöpferin Miss Sakina Wisdom</div>
   </div>
 
+  <!-- Hero -->
   <main class="hero" id="home">
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
     <h2 lang="de">SPRICHt: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
@@ -189,12 +177,13 @@
     <h2>ISBN 978-3-982-0000-2018</h2>
   </main>
 
-  <!-- Unterseiten -->
+  <!-- About -->
   <section id="about">
     <h1>Über mich</h1>
     <p>Hier entsteht dein Editorial-Text in Chanel x Tom Ford Optik.</p>
   </section>
 
+  <!-- Works -->
   <section id="works">
     <h1>Werke</h1>
     <p>Hier entsteht dein Katalog aller Veröffentlichungen.</p>
@@ -202,27 +191,24 @@
       <img src="https://picsum.photos/200?random=1" alt="Werk 1">
       <img src="https://picsum.photos/200?random=2" alt="Werk 2">
       <img src="https://picsum.photos/200?random=3" alt="Werk 3">
-      <img src="https://picsum.photos/200?random=4" alt="Werk 4">
     </div>
   </section>
 
+  <!-- Contact -->
   <section id="contact">
     <h1>Kontakt</h1>
     <p>E-Mail: welcome@geniasystematica.de</p>
   </section>
 
-  <footer>
-    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@geniasystematica.de <br>
-    Alle Rechte vorbehalten · All Rights Reserved
-  </footer>
-
-  <div id="impressum-overlay">
-    <div class="close-btn" onclick="closeImpressum()">×</div>
-    <h2>Impressum & Datenschutz</h2>
+  <!-- Impressum & Datenschutz -->
+  <section id="impressum">
+    <h1>Impressum & Datenschutz</h1>
     <p><strong>Verlagshaus Corpus Genia</strong><br>
        Friedrichsstraße 12<br>
        34117 Kassel<br>
-       Deutschland</p>
+       Deutschland<br>
+       Steuernummer: 026/825/04374
+    </p>
     <p>E-Mail: welcome@geniasystematica.de</p>
     <p>Verantwortlich für den Inhalt: Schöpferin Miss Sakina Wisdom</p>
     <hr>
@@ -236,28 +222,12 @@
        <a href="https://policies.google.com/privacy?hl=de" target="_blank">Google-Datenschutzerklärung</a>.</p>
     <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten. 
        Wenden Sie sich dazu bitte an: welcome@geniasystematica.de</p>
-  </div>
+  </section>
 
-  <script>
-    function showPage(pageId) {
-      document.querySelectorAll('main.hero, section').forEach(el => el.classList.remove('active'));
-      if(pageId === 'home') {
-        document.querySelector('main.hero').classList.add('active');
-      } else {
-        document.getElementById(pageId).classList.add('active');
-      }
-      window.scrollTo(0, 0);
-    }
-    // Home sichtbar beim Laden
-    document.querySelector('main.hero').classList.add('active');
-
-    function openImpressum() {
-      document.getElementById('impressum-overlay').style.display='block';
-    }
-    function closeImpressum() {
-      document.getElementById('impressum-overlay').style.display='none';
-    }
-  </script>
+  <footer>
+    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@geniasystematica.de <br>
+    Steuernummer: 026/825/04374 · Alle Rechte vorbehalten · All Rights Reserved
+  </footer>
 
 </body>
 </html>
