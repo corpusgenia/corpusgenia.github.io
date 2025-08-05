@@ -39,20 +39,20 @@
       background: rgba(0,0,0,0.8);
       display: flex;
       justify-content: center;
-      gap: 40px;
-      padding: 20px 0;
+      gap: 30px;
+      padding: 15px 0;
       z-index: 10;
       opacity: 0;
       animation: fadeIn 3s 14s forwards;
       flex-wrap: wrap;
+      font-size: 1em;
+      letter-spacing: 0.12em;
     }
     nav a {
       color: white;
       text-decoration: none;
-      font-size: 1em;
-      letter-spacing: 0.12em;
+      padding: 6px;
       transition: color 0.3s;
-      padding: 8px;
     }
     nav a:hover, nav a:focus { color: #999; }
 
@@ -69,14 +69,9 @@
       font-size: 2.5em;
       letter-spacing: 0.15em;
       background-color: #000;
-      filter: blur(0px);
-      animation: fadeOut 3s 5s forwards, blurIn 1s 0s;
+      animation: fadeOut 3s 5s forwards;
       padding: 0 20px;
       text-align: center;
-    }
-    @keyframes blurIn {
-      from { filter: blur(10px); }
-      to { filter: blur(0px); }
     }
 
     /* Stage 2: Claim */
@@ -190,6 +185,17 @@
       color:#aaa;
     }
     .close-btn:hover, .close-btn:focus { color:#fff; }
+
+    /* Responsive Anpassung */
+    @media (max-width: 768px) {
+      .intro { font-size: 1.6em; }
+      .claim { font-size: 1em; }
+      .claim p:first-child { font-size: 1.2em; }
+      .claim p:nth-child(2) { font-size: 1.1em; }
+      h1 { font-size: 1.8em; letter-spacing: 0.12em; }
+      h2 { font-size: 0.9em; letter-spacing: 0.1em; }
+      nav { font-size: 0.85em; gap: 15px; }
+    }
 
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
