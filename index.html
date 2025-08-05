@@ -17,6 +17,20 @@
       overflow-x: hidden;
       font-family: 'Lato', sans-serif;
     }
+    a { outline: none; }
+
+    /* Skip-Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #fff;
+      color: #000;
+      padding: 8px 16px;
+      z-index: 1000;
+      transition: top 0.3s;
+    }
+    .skip-link:focus { top: 10px; }
 
     /* ---------- NAV ---------- */
     nav {
@@ -31,6 +45,7 @@
       z-index: 10;
       opacity: 0;
       animation: fadeIn 3s 14s forwards;
+      flex-wrap: wrap;
     }
     nav a {
       color: white;
@@ -38,8 +53,9 @@
       font-size: 1em;
       letter-spacing: 0.12em;
       transition: color 0.3s;
+      padding: 8px;
     }
-    nav a:hover { color: #999; }
+    nav a:hover, nav a:focus { color: #999; }
 
     /* ---------- STAGE 1: INTRO ---------- */
     .intro {
@@ -56,8 +72,9 @@
       background-color: #000;
       filter: blur(0px);
       animation: fadeOut 3s 5s forwards, blurIn 1s 0s;
+      padding: 0 20px;
+      text-align: center;
     }
-
     @keyframes blurIn {
       from { filter: blur(10px); }
       to { filter: blur(0px); }
@@ -78,6 +95,8 @@
       letter-spacing: 0.12em;
       opacity: 0;
       animation: fadeIn 3s 5s forwards, fadeOut 3s 13s forwards;
+      padding: 0 20px;
+      text-align: center;
     }
     .claim p { margin: 0.7em 0; }
     .claim p:first-child { font-size: 1.6em; }
@@ -115,7 +134,6 @@
       z-index: -1;
       animation: gallerySlide 30s infinite linear;
     }
-
     @keyframes gallerySlide {
       0% { background-image: url('https://picsum.photos/1920/1080?grayscale&1'); }
       25% { background-image: url('https://picsum.photos/1920/1080?grayscale&2'); }
@@ -149,7 +167,7 @@
       letter-spacing: 0.08em;
     }
     footer a { color: #777; text-decoration: none; }
-    footer a:hover { color: #fff; }
+    footer a:hover, footer a:focus { color: #fff; }
 
     /* ---------- IMPRESSUM LIGHTBOX ---------- */
     #impressum-overlay {
@@ -170,37 +188,58 @@
     }
     .close-btn {
       position: absolute;
-      top: 20px; right: 40px;
-      font-size: 2em;
+      top: 20px; right: 20px;
+      font-size: 2.5em;
       cursor: pointer;
       color:#aaa;
     }
-    .close-btn:hover { color:#fff; }
+    .close-btn:hover, .close-btn:focus { color:#fff; }
 
-    /* ---------- ANIMATION ---------- */
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1023px) {
+      .intro { font-size: 2em; }
+      .claim { font-size: 1.2em; }
+      .claim p:first-child { font-size: 1.4em; }
+      .claim p:nth-child(2) { font-size: 1.3em; }
+      h1 { font-size: 2.2em; }
+      h2 { font-size: 1em; }
+    }
+    @media (max-width: 767px) {
+      .intro { font-size: 1.6em; }
+      .claim { font-size: 1em; }
+      .claim p:first-child { font-size: 1.2em; }
+      .claim p:nth-child(2) { font-size: 1.1em; }
+      h1 { font-size: 1.8em; }
+      h2 { font-size: 0.9em; }
+    }
+
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes fadeOut { to {opacity: 0; visibility: hidden;} }
-
   </style>
 </head>
 <body>
 
+  <!-- Skip-Link -->
+  <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
   <!-- Stage 1 -->
-  <div class="intro">FILLING THE GAP</div>
+  <div class="intro" aria-label="Intro: Cinematic Start">
+    FILLING THE GAP
+  </div>
 
   <!-- Stage 2 -->
-  <div class="claim">
+  <div class="claim" aria-label="Philosophischer Claim">
     <p lang="de">Weil wenn du einmal sehen kannst, kannst du nie wieder nicht sehen.</p>
     <p lang="en">Once you can see, you can never unsee.</p>
     <p lang="zh">我们一旦能看见，就永远无法不看见</p>
-    <div class="source">— Schöpferin Miss Sakina Wisdom</div>
+    <div class="source">— Schöpferin MISS SAKINAH WISDOM</div>
   </div>
 
   <!-- Stage 3: Hero -->
-  <main class="hero" id="main-content">
-    <div class="gallery-bg"></div>
+  <main class="hero" id="main-content" aria-label="Verlagshaus Corpus Genia Hauptbereich">
+    <div class="gallery-bg" aria-hidden="true"></div>
     <h1>VERLAGSHAUS CORPUS GENIA</h1>
-    <h2 lang="de">SPRICH: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
+    <h2 lang="de">SPRICHT: DIE ANTIKE SPRACHE DER ZUKUNFT</h2>
     <h2 lang="en">SPEAKS: THE ANCIENT LANGUAGE OF THE FUTURE</h2>
     <h2 lang="zh">说：未来的古老语言</h2>
     <h2>ISBN 978-3-982-0000-2018</h2>
@@ -208,29 +247,38 @@
 
   <!-- Footer -->
   <footer>
-    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@genia-systematica.de <br>
-    Alle Rechte vorbehalten · All Rights Reserved · <a href="#" onclick="openImpressum()">Impressum</a>
+    © 2025 VERLAGSHAUS CORPUS GENIA · welcome@geniasystematica.de <br>
+    Alle Rechte vorbehalten · All Rights Reserved · 
+    <a href="#" onclick="openImpressum()" aria-label="Impressum öffnen">Impressum</a>
   </footer>
 
   <!-- Impressum Lightbox -->
-  <div id="impressum-overlay">
-    <div class="close-btn" onclick="closeImpressum()">×</div>
-    <h2>Impressum</h2>
+  <div id="impressum-overlay" role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+    <div class="close-btn" tabindex="0" onclick="closeImpressum()" aria-label="Impressum schließen">×</div>
+    <h2 id="impressum-title">Impressum</h2>
     <p><strong>Verlagshaus Corpus Genia</strong><br>
-    Lüdersweg 18<br>
-    34134 Kassel<br>
+    Friedrichsstr. 12<br>
+    34117 Kassel<br>
     Deutschland</p>
-    <p>E-Mail: welcome@genia-systematica.de</p>
+    <p>E-Mail: welcome@geniasystematica.de</p>
     <p>Verantwortlich für den Inhalt: Schöpferin Miss Sakina Wisdom</p>
   </div>
 
   <script>
     function openImpressum() {
-      document.getElementById('impressum-overlay').style.display='block';
+      const overlay = document.getElementById('impressum-overlay');
+      overlay.style.display='block';
+      overlay.focus();
     }
     function closeImpressum() {
       document.getElementById('impressum-overlay').style.display='none';
     }
+    // ESC-Taste zum Schließen
+    document.addEventListener('keydown', function(e) {
+      if(e.key === "Escape") {
+        closeImpressum();
+      }
+    });
   </script>
 
 </body>
